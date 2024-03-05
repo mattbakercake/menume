@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\Cors;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//direct all web routes through the Vue frontend SPA
+Route::get('/{route?}', function () {
+    return view('app');
+})->where('route', '[\/\w\.-/\d]*')->middleware(Cors::class);
